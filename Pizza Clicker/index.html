@@ -1,0 +1,300 @@
+<HTML>
+    <head>
+        <title>Toast Clicker</title>
+        <link rel="shortcut icon" type="x-icon" href="images/icon.png">
+
+        <style>
+           .sectionLeft {
+                float: left;
+                width: 80%;
+           } 
+           .sectionRight {
+                float: right;
+                width: 20%;
+           }
+
+           .scoreContainer {
+                background-color: rgb(238, 238, 238, 0.6);
+                width: 50%;
+                padding: 10px;
+                border-radius: 50px;
+                font-size: 24px;
+                font-weight: bold;
+           }
+
+           .clickerContainer img {
+                position: relative;
+                transition: all .2s ease-in-out;
+           }
+           
+           .clickerContainer img:hover { transform: scale(1.10); }
+           .clickerContainer img:active{ transform: scale(0.99); }
+
+           .shopButton {
+            background-color: #b5b5b5;
+            transition: all .2s ease-in-out;
+            border-radius: 10px;
+            width: 100%;
+            margin: 10px 0px 10px 0px;
+           }
+
+           .shopButton:hover {
+                background-color: #c7c7c7;
+                transition: all .2s ease-in-out;
+           }
+
+           .shopButton #image {
+                width: 25%
+           }
+
+           .shopButton img {
+                height: 64px;
+                width:64px;
+           }
+
+           .shopButton #nameAndCost p {
+                margin: 0px;
+                width: 60%;
+           }
+
+           .shopButton #nameAndCost p:first-of-type {
+                font-size: 24px;
+
+           }
+
+           .shopButton #amount {
+                font-size: 48px;
+                color: #595959;
+                font-family: roboto;
+                width: 15px;
+           }
+
+           .sectionFooter {
+                margin-top: 20%;
+                font-weight: bold;
+                color: orange;
+                width: 20%;
+           }
+
+           .unselectable {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+           }
+        </style>
+    </head>
+
+    <body>
+        <div class="sectionLeft">
+            <center>
+                <div class="scoreContainer unselectable">
+                <span id="score">0</span> toast<br>
+                <span id="scorepersecond">0</span> toasts per second
+            </div>
+            <br>
+            <div class="clickerContainer unselectable">
+                <img src="images/example.jpg" height="367px" width="367px" onclick="addToScore(clicker)">
+            </div>
+        </center>
+
+        <div class="sectionFooter">
+            <button onclick="resetGame();">Reset Game</button>
+            <h5>Toast Clicker - NorkerGames 2022</h5>
+        </div>
+    </div>
+
+        <div class="sectionRight unselectable">
+            <table class="shopButton unselectable" onclick="buyCursor()">
+                <tr>
+                    <td id="image"><img src="images/cursor.png"></td>
+                    <td id="nameAndCost">
+                        <p>Cursor</p>
+                        <p><span id="cursorcost">15</span> toasts</p>
+                    </td>
+                    <td id="amount"><span id="cursors">0</span></td>
+                </tr>
+            </table>
+            <table class="shopButton unselectable" onclick="buyToaster()">
+                <tr>
+                    <td id="image"><img src="images/toaster.png"></td>
+                    <td id="nameAndCost">
+                        <p>Toaster</p>
+                        <p><span id="toastercost">100</span> toasts</p>
+                    </td>
+                    <td id="amount"><span id="toasters">0</span></td>
+                </tr>
+            </table>
+            <table class="shopButton unselectable" onclick="buyGrill()">
+                <tr>
+                    <td id="image"><img src="images/grill.png"></td>
+                    <td id="nameAndCost">
+                        <p>Grill</p>
+                        <p><span id="grillcost">1000</span> toasts</p>
+                    </td>
+                    <td id="amount"><span id="grills">0</span></td>
+                </tr>
+            </table>
+            <table class="shopButton unselectable" onclick="buyWheatfarm()">
+                <tr>
+                    <td id="image"><img src="images/farm.png"></td>
+                    <td id="nameAndCost">
+                        <p>Wheat Farm</p>
+                        <p><span id="wheatfarmcost">10000</span> toasts</p>
+                    </td>
+                    <td id="amount"><span id="wheatfarms">0</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+            var score = 0;
+            var clicker = 2;
+            var cursorCost = 15;
+            var cursors = 0;
+            var toasterCost = 100;
+            var toasters = 0;
+            var grillCost = 1000;
+            var grills = 0;
+            var wheatfarmCost = 10000;
+            var wheatfarms = 0;
+
+            function buyCursor() {
+                if (score >= cursorCost) {
+                    score = score - cursorCost;
+                    cursors = cursors + 1;
+                    cursorCost = Math.round(cursorCost * 1.15);
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("cursorcost").innerHTML = cursorCost;
+                    document.getElementById("cursors").innerHTML = cursors;
+                    updateScorePerSecond();
+                }
+            }
+            
+            function buyToaster() {
+                if (score >= toasterCost) {
+                    score = score - toasterCost;
+                    toasters = toasters + 1;
+                    toasterCost = Math.round(toasterCost * 1.15);
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("toastercost").innerHTML = toasterCost;
+                    document.getElementById("toasters").innerHTML = toasters;
+                    updateScorePerSecond();
+                }
+            }
+
+            function buyGrill() {
+                if (score >= grillCost) {
+                    score = score - grillCost;
+                    grills = grills + 1;
+                    grillCost = Math.round(grillCost * 1.15);
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("grillcost").innerHTML = grillCost;
+                    document.getElementById("grills").innerHTML = grills;
+                    updateScorePerSecond();
+                }
+            }
+
+            function buyWheatfarm() {
+                if (score >= wheatfarmCost) {
+                    score = score - wheatfarmCost;
+                    wheatfarms = wheatfarms + 1;
+                    wheatfarmCost = Math.round(wheatfarmCost * 1.15);
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("wheatfarmcost").innerHTML = wheatfarmCost;
+                    document.getElementById("wheatfarms").innerHTML = wheatfarms;
+                    updateScorePerSecond();
+                }
+            }
+
+            function addToScore(amount) {
+                score = score + amount;
+                document.getElementById("score").innerHTML = score;
+            }
+
+            function updateScorePerSecond() {
+                scorePerSecond = cursors + toasters * 5 + grills * 70 + wheatfarms * 120;
+                document.getElementById("scorepersecond").innerHTML = scorePerSecond;
+            }
+            
+            function loadGame() {
+                var savedGame = JSON.parse(localStorage.getItem("gameSave"));
+                if (typeof savedGame.score !== "undefined") score = savedGame.score;
+                if (typeof savedGame.clicker !== "undefined") clicker = savedGame.clicker;
+                if (typeof savedGame.cursorCost !== "undefined") cursorCost = savedGame.cursorCost;
+                if (typeof savedGame.cursors !== "undefined") cursors = savedGame.cursors;
+                if (typeof savedGame.toasterCost !== "undefined") toasterCost = savedGame.toasterCost;
+                if (typeof savedGame.toasters !== "undefined") toasters = savedGame.toasters;
+                if (typeof savedGame.grillCost !== "undefined") grillCost = savedGame.grillCost; 
+                if (typeof savedGame.grills !== "undefined") grills = savedGame.grills;
+                if (typeof savedGame.wheatfarmCost !== "undefined") wheatfarmCost = savedGame.wheatfarmCost;
+                if (typeof savedGame.wheatfarms !== "undefined") wheatfarms = savedGame.wheatfarms;
+            }
+
+            function resetGame() {
+                if (confirm("Are you sure you want to reset your game?")) {
+                    var gameSave = {};
+                    localStorage.setItem("gameSave", JSON.stringify(gameSave));
+                    location.reload();
+                }
+            }
+
+            window.onload = function() {
+                loadGame();
+                updateScorePerSecond();
+                document.getElementById("score").innerHTML = score;
+                document.getElementById("cursorcost").innerHTML = cursorCost;
+                document.getElementById("cursors").innerHTML = cursors;
+                document.getElementById("toastercost").innerHTML = toasterCost;
+                document.getElementById("toasters").innerHTML = toasters; 
+                document.getElementById("grillcost").innerHTML = grillCost;
+                document.getElementById("grills").innerHTML = grills;
+                document.getElementById("wheatfarmcost").innerHTML = wheatfarmCost;
+                document.getElementById("wheatfarms").innerHTML = wheatfarms;   
+            };
+
+            function saveGame() {
+                var gameSave = {
+                    score: score,
+                    clicker: clicker,
+                    cursorCost: cursorCost,
+                    cursors: cursors,
+                    toasterCost: toasterCost,
+                    toasters: toasters,
+                    grillCost: grillCost,
+                    grills: grills,
+                    wheatfarmCost: wheatfarmCost,
+                    wheatfarms: wheatfarms
+                };
+                localStorage.setItem("gameSave", JSON.stringify(gameSave));
+            }
+
+
+            setInterval(function() {
+                score = score + cursors * 1;
+                score = score + toasters * 5;
+                score = score + grills * 70;
+                score = score + wheatfarms * 120;
+                document.getElementById("score").innerHTML = score;
+
+                document.title = score + " toasts - Toast Clicker";
+            }, 1000); // 1000ms = 1 sec
+
+            setInterval(function() {
+                saveGame();
+            }, 30000); // 30000ms = 30 sec
+
+            document.addEventListener("keydown", function (event) {
+                if (event.ctrlKey && event.which == 83) {
+                    event.preventDefault();
+                    saveGame();
+                }
+            }, false);
+
+        </script>
+    </body>
+</HTML>
