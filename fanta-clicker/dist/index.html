@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title>Fanta Clicker</title>
+  <link rel="shortcut icon" type="x-icon" href="images/icon.png">
+  <link rel="stylesheet" href="./main.css">
+
+</head>
+<body>
+<HTML>
+    <head>
+        <title>Fanta Clicker</title>
+        <link rel="shortcut icon" type="x-icon" href="images/icon.png">
+    </head>
+
+    <body>
+        <div class="sectionLeft">
+            <center>
+                <div class="scoreContainer unselectable">
+                <span id="score">0</span> Fanta<br>
+                <span id="scorepersecond">0</span> Fanta per second
+            </div>
+            <br>
+            <div class="clickerContainer unselectable">
+                <img src="images/fanta.png" height="367px" width="367px" onclick="game.addToScore(game.clickValue)">
+            </div>
+        </center>
+
+        <div class="sectionFooter">
+            <button onclick="resetGame();">Reset Game</button>
+            <h5>Fanta Clicker - NorkerGames 2022</h5>
+            <img src="images/norker.png" height="100px" width="100px">
+        </div>
+    </div>
+
+        <div class="sectionRight" id="shopContainer">
+            
+        </div>     
+    </body>
+</HTML>
+  <script  src="./main.js"></script>
+</body>
+</html>
